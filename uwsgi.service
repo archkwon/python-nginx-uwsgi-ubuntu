@@ -1,0 +1,21 @@
+[Unit]
+Description=uWSGI Emperor service
+After=syslog.target
+
+
+
+[Service]
+#ExecStartPre=/bin/mkdir -p /tmp
+#ExecStartPre=/bin/chown root:nginx /tmp
+ExecStart=/usr/local/bin/uwsgi --emperor /etc/uwsgi/sites
+#RuntimeDirectory=uwsgi
+Restart=always
+KillSignal=SIGQUIT
+Type=notify
+NotifyAccess=all
+StandardError=syslog
+
+
+
+[Install]
+WantedBy=multi-user.target
